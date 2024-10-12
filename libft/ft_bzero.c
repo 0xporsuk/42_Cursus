@@ -2,7 +2,11 @@
 
 void	ft_bzero(void *c, size_t n)
 {
-	size_t i;
+	unsigned char *p = (unsigned char *) c;
 
-	
+	while (n--)
+	{
+		*p = 0;
+		p++;
+	}
 }
