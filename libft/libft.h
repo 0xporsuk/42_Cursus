@@ -37,6 +37,8 @@ void	ft_bzero(void *ch, size_t n);
 void	*ft_memset(void *dest, int ch, size_t count);
 void	*ft_calloc(size_t nitems, size_t size);
 void	*ft_memmove(void *dest, const void *src, size_t n);
+void	*ft_memchr(const void *str, int c, size_t n);
+
 
 
 //str
