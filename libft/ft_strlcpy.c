@@ -1,6 +1,5 @@
 #include "libft.h"
 
-
 size_t	ft_strlcpy(char *dest, const char *src, size_t destsize)
 {
 	size_t	srcsize;

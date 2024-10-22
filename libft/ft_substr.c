@@ -2,12 +2,12 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t j;
+	size_t	j;
+	char	*dest;
 
-	char *dest = malloc(sizeof(char) * (len + 1));
-
+	dest = malloc(sizeof(char) * (len + 1));
 	j = 0;
-	while(j < len)
+	while (j < len)
 	{
 		dest[j] = s[start];
 		j++;

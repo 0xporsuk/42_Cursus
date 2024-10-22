@@ -26,8 +26,8 @@ static void	ft_itoa_p(char *dest, int *i, int n)
 
 char	*ft_itoa(int n)
 {
-	char *c;
-	int i;
+	char	*c;
+	int		i;
 
 	i = 0;
 	c = (char *)malloc(100);

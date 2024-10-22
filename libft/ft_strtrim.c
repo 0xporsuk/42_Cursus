@@ -1,41 +1,49 @@
 #include "libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+void	begin(char const *s1, char const *set, size_t *i)
 {
-	size_t i;
-	size_t j;
-	char *s1_d;
-	size_t size;
+	size_t	j;
 
-	size = ft_strlen(s1);
-
-	i = 0;
-	while (s1[i] != '\0')
+	while (s1[*i] != '\0')
 	{
 		j = 0;
-		while(s1[i] != set[j] && set[j] != '\0')
+		while (s1[*i] != set[j] && set[j] != '\0')
 		{
 			j++;
 		}
-		if (s1[i] != set[j])
-			break;
-		i++;
+		if (s1[*i] != set[j])
+			break ;
+		(*i)++;
 	}
-	while (size > 0)
-	{
-		j = 0;
-		while(s1[size] != set[j] && set[j] != '\0')
-		{
-			j++;
-		}
-		if (s1[size] != set[j])
-			break;
-		size --;
-	}
-	int t_size = ft_strlen(s1) - (ft_strlen(s1) - size + i);
-	s1_d = malloc(sizeof(char) * t_size);
-	s1_d = (char *)(s1 + i);
-	s1_d[t_size + 1] = '\0';
-	return (s1_d);
 }
 
+void	end(char const *s1, char const *set, size_t *size)
+{
+	size_t	j;
+
+	while (*size > 0)
+	{
+		j = 0;
+		while (s1[*size] != set[j] && set[j] != '\0')
+		{
+			j++;
+		}
+		if (s1[*size] != set[j])
+			break ;
+		(*size)--;
+	}
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	size_t			i;
+	size_t			size;
+	unsigned int	t_size;
+
+	size = ft_strlen(s1);
+	i = 0;
+	begin(s1, set, &i);
+	end(s1, set, &size);
+	t_size = ft_strlen(s1) - (ft_strlen(s1) - (size + i));
+	return (ft_substr(s1, i, size - i + 1));
+}
