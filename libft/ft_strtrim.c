@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/22 19:43:51 by mdonmeze          #+#    #+#             */
+/*   Updated: 2024/10/24 20:39:50 by mdonmeze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void	begin(char const *s1, char const *set, size_t *i)
@@ -38,12 +50,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t			i;
 	size_t			size;
-	unsigned int	t_size;
 
 	size = ft_strlen(s1);
 	i = 0;
 	begin(s1, set, &i);
 	end(s1, set, &size);
-	t_size = ft_strlen(s1) - (ft_strlen(s1) - (size + i));
 	return (ft_substr(s1, i, size - i + 1));
 }

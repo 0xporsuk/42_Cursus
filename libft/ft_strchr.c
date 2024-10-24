@@ -1,19 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/22 19:43:24 by mdonmeze          #+#    #+#             */
+/*   Updated: 2024/10/22 21:10:03 by mdonmeze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strchr(const char *str, int c)
 {
-	const char		*last;
 	unsigned char	ch;
 
-	last = NULL;
 	ch = (unsigned char)c;
 	while (*str != '\0')
 	{
 		if (*str == ch)
-			last = str;
+			return ((char *)str);
 		str++;
 	}
 	if (ch == '\0')
-		return ((char *)(str));
-	return ((char *)last);
+		return ((char *)str);
+	return (NULL);
 }

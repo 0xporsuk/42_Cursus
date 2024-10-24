@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/22 19:42:14 by mdonmeze          #+#    #+#             */
+/*   Updated: 2024/10/24 22:59:12 by mdonmeze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static void	ft_itoa_p(char *dest, int *i, int n)
@@ -28,9 +40,21 @@ char	*ft_itoa(int n)
 {
 	char	*c;
 	int		i;
+	int temp;
+	int count;
 
 	i = 0;
-	c = (char *)malloc(100);
+	count = 0;
+	temp = n;
+	while (temp != 0)
+	{
+		temp /= 10;
+		count++;
+	}
+	c = (char *)malloc(sizeof(char) + (count + 1));
+	if (!c)
+		return NULL;
 	ft_itoa_p(c, &i, n);
+	c[i] = '\0';
 	return (c);
 }
