@@ -6,19 +6,30 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:42:14 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/10/24 22:59:12 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/10/25 21:59:49 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static int	count_num(int n)
+{
+	int	count;
+
+	count = 0;
+	if (n <= 0)
+		count++;
+	while (n != 0)
+	{
+		n /= 10;
+		count++;
+	}
+	return (count);
+}
+
 static void	ft_itoa_p(char *dest, int *i, int n)
 {
-	if (n == -2147483648)
-	{
-		ft_strlcpy(dest, "-2147483648", 12);
-	}
-	else if (n < 0)
+	if (n < 0)
 	{
 		dest[0] = '-';
 		(*i)++;
@@ -40,20 +51,16 @@ char	*ft_itoa(int n)
 {
 	char	*c;
 	int		i;
-	int temp;
-	int count;
 
 	i = 0;
-	count = 0;
-	temp = n;
-	while (temp != 0)
-	{
-		temp /= 10;
-		count++;
-	}
-	c = (char *)malloc(sizeof(char) + (count + 1));
+	c = (char *)malloc(sizeof(char) * (count_num(n) + 1));
 	if (!c)
-		return NULL;
+		return (NULL);
+	if (n == -2147483648)
+	{
+		ft_strlcpy(c, "-2147483648", 12);
+		return (c);
+	}
 	ft_itoa_p(c, &i, n);
 	c[i] = '\0';
 	return (c);
