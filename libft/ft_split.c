@@ -6,81 +6,73 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:43:19 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/10/25 21:37:08 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/10/26 21:31:42 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_wordcount(char const *s, char c)
+static int	count_words(char const *s, char c)
 {
 	int	count;
-	int	i;
 
 	count = 0;
-	i = 0;
-	while (s[i])
+	while (*s)
 	{
-		if (s[i] == c)
-			i++;
-		if (s[i])
+		while (*s == c)
+			s++;
+		if (*s)
 			count++;
-		while (s[i] && s[i] != c)
-			i++;
+		while (*s && *s != c)
+			s++;
 	}
 	return (count);
 }
 
-// static char	**ft_cleaner(char **d, int j)
-// {
-// 	int i;
+static char	*get_next_word(char const **s, char c)
+{
+	char	*start;
+	char	*word;
+	int		len;
 
-// 	i = 0;
-// 	while (i < j)
-// 	{
-// 		free(d[i]);
-// 		i++;
-// 	}
-// 	free(d);
-// 	return (NULL);
-// }
+	while (**s == c)
+		(*s)++;
+	start = (char *)*s;
+	while (**s && **s != c)
+		(*s)++;
+	len = *s - start;
+	word = malloc(len + 1);
+	if (!word)
+		return (NULL);
+	ft_strlcpy(word, start, len + 1);
+	return (word);
+}
 
 char	**ft_split(char const *s, char c)
 {
-	char	**arr;
+	char	**ret;
 	int		i;
-	int		j;
-	int		start;
+	int		words;
 
-	arr = malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
-	if (!arr)
+	if (!s)
+		return (NULL);
+	words = count_words(s, c);
+	ret = malloc(sizeof(char *) * (words + 1));
+	if (!ret)
 		return (NULL);
 	i = 0;
-	j = 0;
-	while (s[i])
+	while (i < words)
 	{
-		while (s[i] && s[i] == c)
-			i++;
-		if (!s[i])
-			break ;
-		start = i;
-		while (s[i] && s[i] != c)
-			i++;
-		arr[j++] = ft_substr(s, start, i - start);
-		// // if (!arr[j])
-		// 	return (ft_cleaner(arr, j));
+		ret[i] = get_next_word(&s, c);
+		if (!(ret[i]))
+		{
+			while (i-- > 0)
+				free(ret[i]);
+			free(ret);
+			return (NULL);
+		}
+		i++;
 	}
-	arr[j] = NULL;
-	return (arr);
+	ret[i] = NULL;
+	return (ret);
 }
-// int main()
-// {
-// 	char **dest = ft_split("hello.world.merhaba.dunya", '.');
-
-// 	int i = 0;
-// 	while (i < 4)
-// 	{
-// 		printf("%s\n", dest[i++]);
-// 	}
-
-// }

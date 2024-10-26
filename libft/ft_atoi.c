@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:41:47 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/10/22 21:46:30 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/10/26 21:38:01 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_atoi(const char *str)
 	}
 	while (ft_isdigit(str[i]))
 	{
-		count = (count * 10) + (str[i] - '0');
+		count = (count * 10) + (str[i] - 48);
 		i++;
 	}
 	return (count * sign);
