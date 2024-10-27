@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:43:31 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/10/24 20:08:58 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/10/27 17:21:28 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		i;
 	int		j;
 
-	s_son = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	s_son = malloc((ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!s_son)
 		return (NULL);
 	i = 0;
