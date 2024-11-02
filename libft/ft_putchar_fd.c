@@ -6,12 +6,11 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:42:53 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/10/22 19:42:54 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:00:30 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <fcntl.h>
 
 void	ft_putchar_fd(char c, int fd)
 {

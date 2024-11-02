@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 19:43:51 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/10/24 20:39:50 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:03:50 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	end(char const *s1, char const *set, size_t *size)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t			i;
-	size_t			size;
+	size_t	i;
+	size_t	size;
 
 	size = ft_strlen(s1);
 	i = 0;
