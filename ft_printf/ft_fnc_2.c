@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 02:59:46 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/11/18 19:39:57 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/12/09 20:17:22 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	ft_unsint(unsigned int a)
 		i += ft_putnbr(a);
 	else if (a > 57)
 	{
-		i += ft_uns(a / 10);
-		i += ft_uns(a % 10);
+		i += ft_unsint(a / 10);
+		i += ft_unsint(a % 10);
 	}
 	return (i);
 }
