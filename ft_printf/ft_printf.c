@@ -35,11 +35,11 @@ int	format(char c, va_list arg)
 		i += ft_hex(va_arg(arg, unsigned int), 1);
 	else if (c == 'p')
 	{
-		ptr = va_arg(arg,unsigned int);
-		if (ptr == 0)
-			return (ft_putstr("(nil)"));
+			ptr = va_arg(arg,unsigned long);
+		if(!ptr)
+			return(ft_putstr("(nil)"));
 		i += ft_putstr("0x");
-		i += ft_ptr(va_arg(arg, unsigned long), 0);
+		i += ft_ptr(ptr, 0);
 	}
 	else
 		i += ft_putchar('%');
