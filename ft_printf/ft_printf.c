@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 23:01:53 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/12/10 18:49:35 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:58:37 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int	format(char c, va_list arg)
 {
 	int	i;
+	unsigned long ptr;
 
 	i = 0;
 	if (c == 'c')
@@ -34,6 +35,9 @@ int	format(char c, va_list arg)
 		i += ft_hex(va_arg(arg, unsigned int), 1);
 	else if (c == 'p')
 	{
+		ptr = va_arg(arg,unsigned int);
+		if (ptr == 0)
+			return (ft_putstr("(nil)"));
 		i += ft_putstr("0x");
 		i += ft_ptr(va_arg(arg, unsigned long), 0);
 	}
