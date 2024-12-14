@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 23:01:53 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/12/14 20:56:56 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/12/14 21:23:20 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,19 @@ int	format(char c, va_list arg)
 		i += ft_putchar('%');
 	return (i);
 }
-int formatptr(va_list arg)
+
+int	formatptr(va_list arg)
 {
-	int i;
-	unsigned long ptr;
+	int				i;
+	unsigned long	ptr;
 
 	i = 0;
-	ptr = va_arg(arg,unsigned long);
+	ptr = va_arg(arg, unsigned long);
 	if (ptr == 0)
 		return (ft_putstr("(nil)"));
 	i += ft_putstr("0x");
 	i += ft_ptr(ptr, 0);
-	return(i);
+	return (i);
 }
 
 int	ft_printf(const char *str, ...)

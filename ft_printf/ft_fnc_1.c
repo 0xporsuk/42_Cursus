@@ -6,12 +6,11 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 02:59:48 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/11/18 18:32:06 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/12/14 21:21:03 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 int	ft_putchar(char c)
 {

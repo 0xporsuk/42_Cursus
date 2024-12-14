@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 02:59:46 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/12/13 17:57:04 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/12/14 21:21:27 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	ft_unsint(unsigned int a)
 	}
 	return (i);
 }
-
 
 int	ft_hex(unsigned int h, int b)
 {
