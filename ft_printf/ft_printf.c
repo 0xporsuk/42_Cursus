@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 23:01:53 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/12/13 17:58:37 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/12/14 20:56:56 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 int	format(char c, va_list arg)
 {
 	int	i;
-	unsigned long ptr;
 
 	i = 0;
 	if (c == 'c')
@@ -33,17 +32,22 @@ int	format(char c, va_list arg)
 		i += ft_hex(va_arg(arg, unsigned int), 0);
 	else if (c == 'X')
 		i += ft_hex(va_arg(arg, unsigned int), 1);
-	else if (c == 'p')
-	{
-			ptr = va_arg(arg,unsigned long);
-		if(!ptr)
-			return(ft_putstr("(nil)"));
-		i += ft_putstr("0x");
-		i += ft_ptr(ptr, 0);
-	}
 	else
 		i += ft_putchar('%');
 	return (i);
+}
+int formatptr(va_list arg)
+{
+	int i;
+	unsigned long ptr;
+
+	i = 0;
+	ptr = va_arg(arg,unsigned int);
+	if (ptr == 0)
+		return (ft_putstr("(nil)"));
+	i += ft_putstr("0x");
+	i += ft_ptr(va_arg(arg, unsigned long), 0);
+	return(i);
 }
 
 int	ft_printf(const char *str, ...)
@@ -62,14 +66,14 @@ int	ft_printf(const char *str, ...)
 			i++;
 			while (str[i] == ' ' && str[i])
 				i++;
-			count += format(str[i], arg);
+			if (str[i] == 'p')
+				count += formatptr(arg);
+			else
+				count += format(str[i], arg);
 			i++;
 		}
 		else
-		{
-			count += ft_putchar(str[i]);
-			i++;
-		}
+			count += ft_putchar(str[i++]);
 	}
 	va_end(arg);
 	return (count);
