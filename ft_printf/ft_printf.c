@@ -42,11 +42,11 @@ int formatptr(va_list arg)
 	unsigned long ptr;
 
 	i = 0;
-	ptr = va_arg(arg,unsigned int);
+	ptr = va_arg(arg,unsigned long);
 	if (ptr == 0)
 		return (ft_putstr("(nil)"));
 	i += ft_putstr("0x");
-	i += ft_ptr(va_arg(arg, unsigned long), 0);
+	i += ft_ptr(ptr, 0);
 	return(i);
 }
 
