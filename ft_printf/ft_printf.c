@@ -6,12 +6,11 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 23:01:53 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/12/14 21:23:20 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/12/16 10:21:45 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "stdarg.h"
 
 int	format(char c, va_list arg)
 {
