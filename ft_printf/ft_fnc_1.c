@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fnc_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: muhammetdonmezer <muhammetdonmezer@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 02:59:48 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/12/14 21:21:03 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/12/21 18:59:22 by muhammetdon      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	ft_putchar(char c)
 {
 	write (1, &c, 1);
+	return (1);
 }
 
 int	ft_putstr(char *c)
