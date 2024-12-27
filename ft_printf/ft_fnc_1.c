@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fnc_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muhammetdonmezer <muhammetdonmezer@stud    +#+  +:+       +#+        */
+/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 02:59:48 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/12/21 18:59:22 by muhammetdon      ###   ########.fr       */
+/*   Updated: 2024/12/22 15:25:09 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
