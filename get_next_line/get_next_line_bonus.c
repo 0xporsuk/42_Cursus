@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:39:50 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/12/27 11:30:56 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/12/27 13:41:13 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*get_next_line(int fd)
 	static char	*readone[1024];
 	char		*arr;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
 		return (NULL);
 	readone[fd] = readline(fd, readone[fd]);
 	if (!readone[fd])
