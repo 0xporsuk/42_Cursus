@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:40:54 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/12/23 19:13:38 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/12/27 15:09:22 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <limits.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 2147483648
+#  define BUFFER_SIZE 42
 
 # endif
 
