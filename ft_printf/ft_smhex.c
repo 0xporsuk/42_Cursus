@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_smhex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/19 16:38:55 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/12/19 16:38:55 by mdonmeze         ###   ########.fr       */
+/*   Created: 2024/12/19 16:39:21 by mdonmeze          #+#    #+#             */
+/*   Updated: 2024/12/19 16:39:21 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdarg.h>
-# include <unistd.h>
+int	ft_smhex(unsigned int x)
+{
+	int	i;
 
-int	ft_printf(const char *str, ...);
-int	ft_putstr(char *s);
-int	ft_unnbr(unsigned long u);
-int	ft_pointer(unsigned long ptr);
-int	ft_smhex(unsigned int x);
-int	ft_bghex(unsigned int x);
-int	ft_putchar(char c);
-int	ft_putnbr(int n);
-#endif
+	i = 0;
+	if (x >= 16)
+		i += ft_smhex(x / 16);
+	if ((x % 16) < 10)
+		i += ft_putchar((x % 16) + '0');
+	else
+		i += ft_putchar((x % 16) + 87);
+	return (i);
+}
