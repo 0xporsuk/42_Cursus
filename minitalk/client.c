@@ -1,3 +1,4 @@
+#include "minitalk.h"
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,12 +26,10 @@ void send_char(int pid, unsigned char c) {
             kill(pid, SIGUSR1);
         else
             kill(pid, SIGUSR2);
-        // Server'dan onay gelene kadar bekle
         while (!g_bit_received)
             pause();
     }
 }
-
 int main(int argc, char *argv[]) {
     int server_pid;
     char *message;
@@ -47,6 +46,7 @@ int main(int argc, char *argv[]) {
         send_char(server_pid, *message);
         message++;
     }
+    send_char(server_pid, '\0');  // NULL karakteri gönder
     
     return 0;
 }

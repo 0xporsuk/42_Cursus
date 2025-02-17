@@ -1,29 +1,35 @@
-NAME_SERVER = serversaxz c
+NAME_SERVER = server
 NAME_CLIENT = client
+NAME_SERVER_BONUS = server_bonus
+NAME_CLIENT_BONUS = client_bonus
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC_SERVER = server.c
-SRC_CLIENT = client.c
+$(NAME_SERVER): server.c minitalk.h
+	$(CC) $(CFLAGS) server.c -o $(NAME_SERVER)
 
-OBJ_SERVER = $(SRC_SERVER:.c=.o)
-OBJ_CLIENT = $(SRC_CLIENT:.c=.o)
+$(NAME_CLIENT): client.c minitalk.h
+	$(CC) $(CFLAGS) client.c -o $(NAME_CLIENT)
+
+$(NAME_SERVER_BONUS): server_bonus.c minitalk_bonus.h
+	$(CC) $(CFLAGS) server_bonus.c -o $(NAME_SERVER_BONUS)
+
+$(NAME_CLIENT_BONUS): client_bonus.c minitalk_bonus.h
+	$(CC) $(CFLAGS) client_bonus.c -o $(NAME_CLIENT_BONUS)
 
 all: $(NAME_SERVER) $(NAME_CLIENT)
 
-$(NAME_SERVER): $(OBJ_SERVER)
-	$(CC) $(CFLAGS) -o $(NAME_SERVER) $(OBJ_SERVER)
-
-$(NAME_CLIENT): $(OBJ_CLIENT)
-	$(CC) $(CFLAGS) -o $(NAME_CLIENT) $(OBJ_CLIENT)
+bonus: $(NAME_SERVER_BONUS) $(NAME_CLIENT_BONUS)
 
 clean:
-	rm -f $(OBJ_SERVER) $(OBJ_CLIENT)
+	rm -f $(NAME_SERVER) $(NAME_CLIENT)
+	rm -f $(NAME_SERVER_BONUS) $(NAME_CLIENT_BONUS)
 
 fclean: clean
-	rm -f $(NAME_SERVER) $(NAME_CLIENT)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+bonus_re: fclean bonus
+
+.PHONY: all clean fclean re bonus bonus_re

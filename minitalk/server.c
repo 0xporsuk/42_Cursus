@@ -18,7 +18,6 @@ void signal_handler(int signum, siginfo_t *info, void *context) {
         bit_count = 0;
         current_char = 0;
     }
-    // Her bit alındığında client'a bilgi gönder
     kill(info->si_pid, SIGUSR1);
 }
 
