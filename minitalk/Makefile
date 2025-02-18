@@ -1,35 +1,37 @@
-NAME_SERVER = server
-NAME_CLIENT = client
-NAME_SERVER_BONUS = server_bonus
-NAME_CLIENT_BONUS = client_bonus
-
+NAME = minitalk
+SERVER = server
+CLIENT = client
+SERVER_BONUS = server_bonus
+CLIENT_BONUS = client_bonus
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+SRC = utils.c
+SRC_BONUS = utils_bonus.c
 
-$(NAME_SERVER): server.c minitalk.h
-	$(CC) $(CFLAGS) server.c -o $(NAME_SERVER)
+all: $(NAME)
 
-$(NAME_CLIENT): client.c minitalk.h
-	$(CC) $(CFLAGS) client.c -o $(NAME_CLIENT)
+bonus: $(SERVER_BONUS) $(CLIENT_BONUS)
 
-$(NAME_SERVER_BONUS): server_bonus.c minitalk_bonus.h
-	$(CC) $(CFLAGS) server_bonus.c -o $(NAME_SERVER_BONUS)
+$(NAME): $(SERVER) $(CLIENT)
 
-$(NAME_CLIENT_BONUS): client_bonus.c minitalk_bonus.h
-	$(CC) $(CFLAGS) client_bonus.c -o $(NAME_CLIENT_BONUS)
+$(SERVER): server.c $(SRC)
+	$(CC) $(CFLAGS) -o $(SERVER) server.c $(SRC)
 
-all: $(NAME_SERVER) $(NAME_CLIENT)
+$(CLIENT): client.c $(SRC)
+	$(CC) $(CFLAGS) -o $(CLIENT) client.c $(SRC)
 
-bonus: $(NAME_SERVER_BONUS) $(NAME_CLIENT_BONUS)
+$(SERVER_BONUS): server_bonus.c $(SRC_BONUS)
+	$(CC) $(CFLAGS) -o $(SERVER_BONUS) server_bonus.c $(SRC_BONUS)
+
+$(CLIENT_BONUS): client_bonus.c $(SRC_BONUS)
+	$(CC) $(CFLAGS) -o $(CLIENT_BONUS) client_bonus.c $(SRC_BONUS)
 
 clean:
-	rm -f $(NAME_SERVER) $(NAME_CLIENT)
-	rm -f $(NAME_SERVER_BONUS) $(NAME_CLIENT_BONUS)
+	rm -f $(SERVER) $(CLIENT) $(SERVER_BONUS) $(CLIENT_BONUS)
 
 fclean: clean
+	rm -f $(NAME)
 
 re: fclean all
 
-bonus_re: fclean bonus
-
-.PHONY: all clean fclean re bonus bonus_re
+.PHONY: all clean fclean re

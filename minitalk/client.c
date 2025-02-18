@@ -1,52 +1,53 @@
 #include "minitalk.h"
-#include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
-volatile sig_atomic_t g_bit_received = 0;
+volatile sig_atomic_t	g_flag = 0;
 
-void bit_handler(int signum) {
-    (void)signum;
-    g_bit_received = 1;
+void	flg_handler(int sig)
+{
+	(void)sig;
+	if (sig == SIGUSR1)
+		g_flag = 1;
 }
 
-void send_char(int pid, unsigned char c) {
-    int i;
-    struct sigaction sa;
-    
-    sa.sa_handler = bit_handler;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = 0;
-    sigaction(SIGUSR1, &sa, NULL);
-    
-    for (i = 7; i >= 0; i--) {
-        g_bit_received = 0;
-        if (c & (1 << i))
-            kill(pid, SIGUSR1);
-        else
-            kill(pid, SIGUSR2);
-        while (!g_bit_received)
-            pause();
-    }
+void	send_signal(int pid, char c)
+{
+	int	bit;
+
+	bit = 0;
+	while (bit < 8)
+	{						//0100-1000
+		if (c & (1 << bit)) //1000-1000
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		while (!g_flag)
+			;
+		g_flag = 0;
+		bit++;
+	}
 }
-int main(int argc, char *argv[]) {
-    int server_pid;
-    char *message;
-    
-    if (argc != 3) {
-        printf("Usage: %s <server_pid> <message>\n", argv[0]);
-        return 1;
-    }
-    
-    server_pid = atoi(argv[1]);
-    message = argv[2];
-    
-    while (*message) {
-        send_char(server_pid, *message);
-        message++;
-    }
-    send_char(server_pid, '\0');  // NULL karakteri gönder
-    
-    return 0;
+
+int	main(int argc, char **argv)
+{
+	int		pid;
+	char	*message;
+
+	if (argc != 3)
+	{
+		ft_putstr("Error: wrong format.\n");
+		ft_putstr("Try: ./client <PID> <message>\n");
+		return (1);
+	}
+	pid = ft_atoi(argv[1]);
+	if (kill(pid, 0) == -1 || pid <= 0)
+	{
+		ft_putstr("Error: invalid PID.\n");
+		return (1);
+	}
+	signal(SIGUSR1, flg_handler);
+	message = argv[2];
+	while (*message)
+		send_signal(pid, *message++);
+	send_signal(pid, '\0');
+	return (0);
 }
