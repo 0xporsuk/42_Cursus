@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/18 17:31:16 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/03/09 00:10:43 by mdonmeze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
 volatile sig_atomic_t	g_flag = 0;
 
-void	flg_handler(int sig)
+void	flag_handler(int sig)
 {
 	(void)sig;
 	if (sig == SIGUSR1)
@@ -15,8 +27,8 @@ void	send_signal(int pid, char c)
 
 	bit = 0;
 	while (bit < 8)
-	{						//0100-1000
-		if (c & (1 << bit)) //1000-1000
+	{
+		if (c & (1 << bit))
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
@@ -44,7 +56,7 @@ int	main(int argc, char **argv)
 		ft_putstr("Error: invalid PID.\n");
 		return (1);
 	}
-	signal(SIGUSR1, flg_handler);
+	signal(SIGUSR1, flag_handler);
 	message = argv[2];
 	while (*message)
 		send_signal(pid, *message++);
