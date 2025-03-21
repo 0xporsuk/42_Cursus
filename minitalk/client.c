@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:31:16 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/03/09 00:10:43 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2025/03/16 18:32:45 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 volatile sig_atomic_t	g_flag = 0;
 
-void	flag_handler(int sig)
+void	handler_flag(int sig)
 {
 	(void)sig;
 	if (sig == SIGUSR1)
 		g_flag = 1;
 }
 
-void	send_signal(int pid, char c)
+void	send_sig(int pid, char c)
 {
 	int	bit;
 
@@ -56,10 +56,10 @@ int	main(int argc, char **argv)
 		ft_putstr("Error: invalid PID.\n");
 		return (1);
 	}
-	signal(SIGUSR1, flag_handler);
+	signal(SIGUSR1, handler_flag);
 	message = argv[2];
 	while (*message)
-		send_signal(pid, *message++);
-	send_signal(pid, '\0');
+		send_sig(pid, *message++);
+	send_sig(pid, '\0');
 	return (0);
 }

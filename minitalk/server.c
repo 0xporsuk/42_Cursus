@@ -6,13 +6,13 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:31:28 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/03/03 18:31:31 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2025/03/16 18:33:13 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	ft_handler(int sig, siginfo_t *info, void *context)
+void	handler(int sig, siginfo_t *info, void *context)
 {
 	static int	bit = 0;
 	static char	c = 0;
@@ -41,7 +41,7 @@ int	main(void)
 {
 	struct sigaction	act;
 
-	act.sa_sigaction = ft_handler;
+	act.sa_sigaction = handler;
 	act.sa_flags = SA_SIGINFO;
 	sigemptyset(&act.sa_mask);
 	if (sigaction(SIGUSR1, &act, NULL) == -1)
