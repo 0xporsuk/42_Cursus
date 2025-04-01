@@ -5,27 +5,20 @@ int	is_rectangular(t_game *game)
 	int	i;
 	int	len;
 
-	if (game->height < 3)
+	if (game->height < 3 || game->width < 3)
 	{
-		ft_printf("Error\nMap must have at least 3 rows\n");
+		ft_printf("Error\nMap must be at least 3x3\n");
 		return (0);
 	}
-
-	if (game->width < 3)
-	{
-		ft_printf("Error\nMap must have at least 3 columns\n");
-		return (0);
-	}
-
 	i = 1;
 	while (i < game->height)
 	{
 		len = ft_strlen(game->map[i]);
 		if (len != game->width)
 		{
-			ft_printf("Error\nMap must be rectangular\n")
+			ft_printf("Error\nMap must be rectangular\n");
 			return (0);
-		}""
+		}
 		i++;
 	}
 	return (1);
@@ -43,12 +36,12 @@ int is_sur_walls(t_game *game)
 			ft_printf("Error\nMap must be surrounded by walls\n");
 			return (0);
 		}
+		i++;
 	}
-
 	i = 0;
 	while (i < game->height)
 	{
-		if (game->map[i][0] != WALL || game->map[i][game->height - 1] != WALL)
+		if (game->map[i][0] != WALL || game->map[i][game->width - 1] != WALL)
 		{
 			ft_printf("Error\nMap must be surrounded by walls\n");
 			return (0);
@@ -58,28 +51,61 @@ int is_sur_walls(t_game *game)
 	return (1);
 }
 
-int req_elements(t_game *game)
+void check_character(t_game *game, char c, int i, int j, int *counts)
+{
+	if (c == EXIT)
+		counts[0]++;
+	else if (c == PLAYER)
+	{
+		counts[1]++;
+		game->player_x = j;
+		game->player_y = i;
+	}
+	else if (c == COLLECTIBLE)
+		counts[2]++;
+	else if (c != EMPTY && c != WALL)
+	{
+		ft_printf("Error\nInvalid character in map %c\n", c);
+		counts[3] = 1;;
+	}
+}
+
+int is_req_elements(t_game *game)
 {
 	int	i;
 	int	j;
-	int	exit_count;
-	int	player_count;
-	int	collectible_count;
+	int	counts[4];
 
-	exit_count = 0;
-	player_count = 0;
-	collectible_count = 0;
-
+	ft_memset(counts, 0, sizeof(counts));
 	i = 0;
 	while (i < game->height)
 	{
 		j = 0;
 		while (j < game->width)
 		{
-			if (game->map[i][j] == EXIT)
-				exit_count++;
-			else if
+			check_character(game, game->map[i][j], i, j, counts);
+			j++;
 		}
+		i++;
 	}
+	if (counts[3])
+		return (0);
+	if (counts[0] != 1 || counts[1] != 1 || counts[2] < 1)
+	{
+		ft_printf("Error\nMap must have exactly 1 exit, 1 player, and at least 1 collectible\n");
+		return (0);
+	}
+	game->collectibles = counts[2];
+	return (1);
+}
 
+int validate_map(t_game *game)
+{
+	if (!is_rectangular(game))
+		return (0);
+	if (!is_sur_walls(game))
+		return (0);
+	if (!is_req_elements(game))
+		return (0);
+	return (1);
 }

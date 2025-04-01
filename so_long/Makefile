@@ -1,47 +1,58 @@
 NAME = so_long
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-RM = rm -f
+CFLAGS = -Wall -Wextra -Werror -g
 
-SRCS_DIR = srcs/
-SRCS = main.c map_reader.c map_validator.c
+SRCS = srcs/main.c srcs/map_reader.c srcs/map_validator.c srcs/mlx_init.c srcs/render.c srcs/player_move.c
 
-OBJS = $(addprefix $(SRCS_DIR), $(SRCS:.c=.o))
+GNL_SRCS = ../get_next_line/get_next_line.c ../get_next_line/get_next_line_utils.c
 
-LIBFT_DIR = ../libft/
-LIBFT = $(LIBFT_DIR)libft.a
+OBJS = $(SRCS:.c=.o)
+GNL_OBJS = $(GNL_SRCS:.c=.o)
 
-FT_PRINTF_DIR = ../ft_printf/
-FT_PRINTF = $(FT_PRINTF_DIR)libftprintf.a
+LIBFT = ../libft/libft.a
+PRINTF = ../ft_printf/libftprintf.a
+MLX = minilibx-linux/libmlx.a
 
-INCLUDES = -I./includes -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR)
+INCLUDES = -I./includes -I../libft -I../ft_printf -I../get_next_line -Iminilibx-linux
 
-MLX_FLAGS = -lmlx -lXext -lX11
+X11_FLAGS = -L/usr/X11/lib -lXext -lX11
 
 all: $(NAME)
 
+$(NAME): $(LIBFT) $(PRINTF) $(MLX) $(OBJS) $(GNL_OBJS)
+	@echo "Linking $(NAME)..."
+	@$(CC) $(CFLAGS) $(OBJS) $(GNL_OBJS) -L../libft -lft -L../ft_printf -lftprintf -Lminilibx-linux -lmlx $(X11_FLAGS) -o $(NAME)
+	@echo "$(NAME) created!"
+
 $(LIBFT):
-    make -C $(LIBFT_DIR)
+	@echo "Compiling libft..."
+	@make -C ../libft
 
-$(FT_PRINTF):
-    make -C $(FT_PRINTF_DIR)
+$(PRINTF):
+	@echo "Compiling ft_printf..."
+	@make -C ../ft_printf
 
-$(NAME): $(LIBFT) $(FT_PRINTF) $(OBJS)
-    $(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf $(MLX_FLAGS) -o $(NAME)
+$(MLX):
+	@echo "Compiling MinilibX..."
+	@make -C minilibx-linux
 
 %.o: %.c
-    $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@echo "Compiling $<..."
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-    make -C $(LIBFT_DIR) clean
-    make -C $(FT_PRINTF_DIR) clean
-    $(RM) $(OBJS)
+	@echo "Cleaning object files..."
+	@rm -f $(OBJS) $(GNL_OBJS)
+	@make -C ../libft clean
+	@make -C ../ft_printf clean
+	@make -C minilibx-linux clean
 
 fclean: clean
-    make -C $(LIBFT_DIR) fclean
-    make -C $(FT_PRINTF_DIR) fclean
-    $(RM) $(NAME)
+	@echo "Cleaning executable..."
+	@rm -f $(NAME)
+	@make -C ../libft fclean
+	@make -C ../ft_printf fclean
 
 re: fclean all
 

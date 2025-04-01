@@ -7,14 +7,9 @@ int	check_file_extension(char *filename)
 	len = ft_strlen(filename);
 	if (len <= 4)
 		return (0);
-	if (filename[len - 4] != '.' ||
-		filename[len - 3] != 'b' ||
-		filename[len - 2] != 'e' ||
-		filename[len - 1] != 'r')
-		return (0);
-
-	return (1);
+	return (ft_strncmp(&filename[len - 4], ".ber", 4) == 0);
 }
+
 int	count_lines(char *filename)
 {
 	int fd;
@@ -22,7 +17,7 @@ int	count_lines(char *filename)
 	char *line;
 
 	line_count = 0;
-	fd = open(filename, O_RDONLY)
+	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (-1);
 
@@ -34,6 +29,12 @@ int	count_lines(char *filename)
 
 	close(fd);
 	return (line_count);
+}
+void process_line(char *line, t_game *game, int i)
+{
+	if (ft_strchr(line, '\n'))
+		*(ft_strchr(line, '\n')) = 0;
+	game->map[i] = line;
 }
 
 int	read_map(t_game *game, char *filename)
@@ -57,28 +58,18 @@ int	read_map(t_game *game, char *filename)
 	game->map = (char **)malloc(sizeof(char *) * (game->height + 1));
 	if (!game->map)
 		return (0);
-
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		free(game->map)
-		game->map = NULL;
+		free(game->map);
 		return (0);
 	}
 	i = 0;
-	while (i < game->height)
+	while (i < game->height && (line = get_next_line(fd)))
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break;
-
-		if (line[ft_strlen(line) - 1] == '\n')
-			line[ft_strlen(line) - 1] = '\0';
-
-		game->map[i] = line;
+		process_line(line, game, i);
 		i++;
 	}
-	game->map[i] = NULL;
 	close(fd);
 
 	if (game->height > 0)
@@ -104,3 +95,4 @@ void	free_map(t_game *game)
 	free(game->map);
 	game->map = NULL;
 }
+
