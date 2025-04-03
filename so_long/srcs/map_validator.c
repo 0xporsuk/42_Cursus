@@ -10,8 +10,8 @@ int	is_rectangular(t_game *game)
 		ft_printf("Error\nMap must be at least 3x3\n");
 		return (0);
 	}
-	i = 1;
-	while (i < game->height)
+	i = 0;
+	while (i < game->height - 1)
 	{
 		len = ft_strlen(game->map[i]);
 		if (len != game->width)

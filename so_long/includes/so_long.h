@@ -49,13 +49,10 @@ typedef struct s_img {
     int     height;
 } t_img;
 
-void	init_game(t_game *game);
 void	cleanup_and_exit(t_game *game, int exit_code);
 int		handle_close(t_game *game);
 
 int		check_file_extension(char *filename);
-int		count_lines(char *filename);
-void	process_line(char *line, t_game *game, int i);
 int		read_map(t_game *game, char *filename);
 void	free_map(t_game *game);
 

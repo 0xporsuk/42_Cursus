@@ -18,9 +18,7 @@ int	init_mlx(t_game *game)
 		ft_printf("Error\nFailed to create window\n");
 		return (0);
 	}
-
 	ft_printf("Window dimensions: %d x %d\n", win_width, win_height);
-
 	return (1);
 }
 
@@ -30,9 +28,15 @@ void	cleanup_mlx(t_game *game)
 	{
 		cleanup_images(game);
 		if (game->win)
+		{
 			mlx_destroy_window(game->mlx, game->win);
-		free(game->mlx);
-		game->mlx = NULL;
-		game->win = NULL;
+			game->win = NULL;
+		}
+		if (game->mlx)
+		{
+			mlx_destroy_display(game->mlx);
+			free(game->mlx);
+			game->mlx = NULL;
+		}
 	}
 }

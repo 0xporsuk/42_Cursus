@@ -9,72 +9,29 @@ int	check_file_extension(char *filename)
 		return (0);
 	return (ft_strncmp(&filename[len - 4], ".ber", 4) == 0);
 }
-
-int	count_lines(char *filename)
-{
-	int fd;
-	int line_count;
-	char *line;
-
-	line_count = 0;
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (-1);
-
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		line_count++;
-		free(line);
-	}
-
-	close(fd);
-	return (line_count);
-}
-void process_line(char *line, t_game *game, int i)
-{
-	if (ft_strchr(line, '\n'))
-		*(ft_strchr(line, '\n')) = 0;
-	game->map[i] = line;
-}
-
 int	read_map(t_game *game, char *filename)
 {
 	int		fd;
-	int		i;
 	char	*line;
+	char	*tmp;
 
-	if (!check_file_extension(filename))
-	{
-		ft_printf("Error\nInvalid file extension. Must be .ber\n");
-		return (0);
-	}
-
-	game->height = count_lines(filename);
-	if (game->height <= 0)
-	{
-		ft_printf("Error\nFailed to read map or empty file\n");
-		return (0);
-	}
-	game->map = (char **)malloc(sizeof(char *) * (game->height + 1));
-	if (!game->map)
-		return (0);
-	fd = open(filename, O_RDONLY);
+	fd = open(filename, O_RDONLY, 0644);
 	if (fd < 0)
-	{
-		free(game->map);
 		return (0);
-	}
-	i = 0;
-	while (i < game->height && (line = get_next_line(fd)))
+	line = NULL;
+	tmp = get_next_line(fd);
+	if (!tmp)
+		cleanup_and_exit(game, 1);
+	while (tmp)
 	{
-		process_line(line, game, i);
-		i++;
+		line = ft_strjoin(line, tmp);
+		game->height++;
+		free(tmp);
+		tmp = get_next_line(fd);
 	}
-	close(fd);
-
-	if (game->height > 0)
-		game->width = ft_strlen(game->map[0]);
-
+	game->map = ft_split(line, '\n');
+	game->width = (int)ft_strlen(game->map[0]);
+	free(line);
 	return (1);
 }
 
@@ -84,7 +41,6 @@ void	free_map(t_game *game)
 
 	if (!game->map)
 		return;
-
 	i = 0;
 	while (i < game->height)
 	{
@@ -95,4 +51,3 @@ void	free_map(t_game *game)
 	free(game->map);
 	game->map = NULL;
 }
-
