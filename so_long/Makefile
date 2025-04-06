@@ -3,7 +3,7 @@ NAME = so_long
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRCS = srcs/main.c srcs/map_reader.c srcs/map_validator.c srcs/mlx_init.c srcs/render.c srcs/player_move.c
+SRCS = srcs/main.c srcs/map_reader.c srcs/map_validator.c srcs/mlx_init.c srcs/render.c srcs/player_move.c srcs/path_validator.c
 
 GNL_SRCS = ../get_next_line/get_next_line.c ../get_next_line/get_next_line_utils.c
 

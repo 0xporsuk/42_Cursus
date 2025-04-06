@@ -78,5 +78,9 @@ int		key_hook(int keycode, t_game *game);
 
 char	*get_next_line(int fd);
 
+char	**duplicate_map(t_game *game);
+void	flood_fill(char **map, int x, int y, int *reach_counts);
+int		check_valid_path(t_game *game);
+
 #endif
 

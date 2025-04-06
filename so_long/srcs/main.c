@@ -17,7 +17,7 @@ int main(int ac, char **av)
 {
 	t_game game;
 
-	if (ac != 2 || !check_file_extension(av[0]))
+	if (ac != 2 || check_file_extension(av[0]))
 	{
 		ft_printf("Error\nUsage: ./so_long map_file.ber\n");
 		return (1);

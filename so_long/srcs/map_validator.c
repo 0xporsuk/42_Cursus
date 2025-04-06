@@ -107,5 +107,7 @@ int validate_map(t_game *game)
 		return (0);
 	if (!is_req_elements(game))
 		return (0);
+	if (!check_valid_path(game))
+		return (0);
 	return (1);
 }
