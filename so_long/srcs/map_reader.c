@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_reader.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/07 19:22:32 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/04/07 19:23:35 by mdonmeze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	check_file_extension(char *filename)
@@ -9,6 +21,7 @@ int	check_file_extension(char *filename)
 		return (0);
 	return (ft_strncmp(&filename[len - 4], ".ber", 4) == 0);
 }
+
 int	read_map(t_game *game, char *filename)
 {
 	int		fd;
@@ -37,10 +50,10 @@ int	read_map(t_game *game, char *filename)
 
 void	free_map(t_game *game)
 {
-	int i;
+	int	i;
 
 	if (!game->map)
-		return;
+		return ;
 	i = 0;
 	while (i < game->height)
 	{

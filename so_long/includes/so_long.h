@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/07 19:21:22 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/04/07 19:40:05 by mdonmeze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -23,31 +35,31 @@
 
 typedef struct s_game
 {
-	void *mlx;
-	void *win;
-	char **map;
-	int width;
-	int height;
-	int player_x;
-	int player_y;
-	int collectibles;
-	int collected;
-	int moves;
-	int exit_x;
-	int exit_y;
+	void	*mlx;
+	void	*win;
+	char	**map;
+	int		width;
+	int		height;
+	int		player_x;
+	int		player_y;
+	int		collectibles;
+	int		collected;
+	int		moves;
+	int		exit_x;
+	int		exit_y;
 
 	void	*wall;
-    void	*empty;
-    void	*player;
-    void	*collectible;
-    void	*exit;
+	void	*empty;
+	void	*player;
+	void	*collectible;
+	void	*exit;
 }t_game;
 
 typedef struct s_img {
-    void    *img;
-    int     width;
-    int     height;
-} t_img;
+	void	*img;
+	int		width;
+	int		height;
+}	t_img;
 
 void	cleanup_and_exit(t_game *game, int exit_code);
 int		handle_close(t_game *game);
@@ -58,7 +70,7 @@ void	free_map(t_game *game);
 
 int		is_rectangular(t_game *game);
 int		is_sur_walls(t_game *game);
-void	check_character(t_game *game, char c, int i, int j, int *counts);
+void	check_character(t_game *game, int i, int j, int *counts);
 int		is_req_elements(t_game *game);
 int		validate_map(t_game *game);
 
@@ -83,4 +95,3 @@ void	flood_fill(char **map, int x, int y, int *reach_counts);
 int		check_valid_path(t_game *game);
 
 #endif
-

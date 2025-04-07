@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/07 19:22:19 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/04/07 19:22:20 by mdonmeze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	cleanup_and_exit(t_game *game, int exit_code)
@@ -6,6 +18,7 @@ void	cleanup_and_exit(t_game *game, int exit_code)
 	cleanup_mlx(game);
 	exit(exit_code);
 }
+
 int	handle_close(t_game *game)
 {
 	ft_printf("Game closed\n");
@@ -13,9 +26,9 @@ int	handle_close(t_game *game)
 	return (0);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_game game;
+	t_game	game;
 
 	if (ac != 2 || check_file_extension(av[0]))
 	{

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/07 19:35:28 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/04/07 19:35:29 by mdonmeze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	*load_image(t_game *game, char *path)
@@ -20,8 +32,8 @@ int	load_images(t_game *game)
 	game->player = load_image(game, "textures/player.xpm");
 	game->collectible = load_image(game, "textures/collectible.xpm");
 	game->exit = load_image(game, "textures/exit.xpm");
-	if (!game->wall || !game->empty || !game->player ||
-		!game->collectible || !game->exit)
+	if (!game->wall || !game->empty || !game->player
+		|| !game->collectible || !game->exit)
 	{
 		ft_printf("Error\nFailed to load one or more images\n");
 		return (0);
@@ -37,8 +49,8 @@ void	draw_tile(t_game *game, void *img, int x, int y)
 
 void	render_map(t_game *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < game->height)

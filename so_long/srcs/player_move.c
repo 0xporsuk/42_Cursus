@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_move.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/07 19:35:36 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/04/07 19:35:37 by mdonmeze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	move_player(t_game *game, int new_x, int new_y)
@@ -41,7 +53,7 @@ void	try_move(t_game *game, int x, int y)
 	{
 		ft_printf("Congratulations! You completed the level in %d moves.\n",
 			game->moves + 1);
-			cleanup_and_exit(game, 0);
+		cleanup_and_exit(game, 0);
 	}
 	move_player(game, x, y);
 	render_map(game);
@@ -54,13 +66,13 @@ int	key_hook(int keycode, t_game *game)
 		ft_printf("Game closed\n");
 		cleanup_and_exit(game, 0);
 	}
-	else if(keycode == KEY_W)
+	else if (keycode == KEY_W)
 		try_move(game, game->player_x, game->player_y - 1);
-	else if(keycode == KEY_A)
+	else if (keycode == KEY_A)
 		try_move(game, game->player_x - 1, game->player_y);
-	else if(keycode == KEY_S)
+	else if (keycode == KEY_S)
 		try_move(game, game->player_x, game->player_y + 1);
-	else if(keycode == KEY_D)
+	else if (keycode == KEY_D)
 		try_move(game, game->player_x + 1, game->player_y);
 	render_map(game);
 	return (0);

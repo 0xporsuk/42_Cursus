@@ -1,17 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_init.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/07 19:29:26 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/04/07 19:29:27 by mdonmeze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	init_mlx(t_game *game)
 {
+	int	win_width;
+	int	win_height;
+
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
 		ft_printf("Error\nFailed to initialize MLX\n");
 		return (0);
 	}
-
-	int win_width = game->width * 32;
-	int win_height = game->height * 32;
-
+	win_width = game->width * 32;
+	win_height = game->height * 32;
 	game->win = mlx_new_window(game->mlx, win_width, win_height, "so_long");
 	if (!game->win)
 	{
