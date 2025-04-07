@@ -15,11 +15,11 @@ void	*load_image(t_game *game, char *path)
 int	load_images(t_game *game)
 {
 	ft_printf("Loading images...\n");
-	game->wall = load_image(game, "assets/wall.xpm");
-	game->empty = load_image(game, "assets/empty.xpm");
-	game->player = load_image(game, "assets/player.xpm");
-	game->collectible = load_image(game, "assets/collectible.xpm");
-	game->exit = load_image(game, "assets/exit.xpm");
+	game->wall = load_image(game, "textures/wall.xpm");
+	game->empty = load_image(game, "textures/empty.xpm");
+	game->player = load_image(game, "textures/player.xpm");
+	game->collectible = load_image(game, "textures/collectible.xpm");
+	game->exit = load_image(game, "textures/exit.xpm");
 	if (!game->wall || !game->empty || !game->player ||
 		!game->collectible || !game->exit)
 	{
