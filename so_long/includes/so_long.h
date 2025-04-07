@@ -5,9 +5,9 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
-# include </home/md/Desktop/code/42_Cursus/ft_printf/ft_printf.h>
-# include </home/md/Desktop/code/42_Cursus/libft/libft.h>
-# include </home/md/Desktop/code/42_Cursus/so_long/minilibx-linux/mlx.h>
+# include <ft_printf.h>
+# include <libft.h>
+# include <mlx.h>
 
 # define EMPTY '0'
 # define WALL '1'

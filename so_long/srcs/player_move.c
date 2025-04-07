@@ -2,10 +2,16 @@
 
 void	move_player(t_game *game, int new_x, int new_y)
 {
-	game->map[game->player_y][game->player_x] = EMPTY;
+	if (game->map[new_y][new_x] == EXIT)
+		game->map[new_y][new_x] = '2';
+	else
+		game->map[new_y][new_x] = PLAYER;
+	if (game->map[game->player_y][game->player_x] == '2')
+		game->map[game->player_y][game->player_x] = 'E';
+	else
+		game->map[game->player_y][game->player_x] = EMPTY;
 	game->player_x = new_x;
 	game->player_y = new_y;
-	game->map[new_y][new_x] = PLAYER;
 	game->moves++;
 	ft_printf("Moves: %d\n", game->moves);
 }
@@ -17,7 +23,7 @@ int	is_valid_move(t_game *game, int x, int y)
 	else if (game->map[y][x] == EXIT && game->collected != game->collectibles)
 	{
 		ft_printf("Collect all items first\n");
-		return (0);
+		return (1);
 	}
 	return (1);
 }
@@ -31,7 +37,7 @@ void	try_move(t_game *game, int x, int y)
 		game->collected++;
 		ft_printf("Collected: %d/%d\n", game->collected, game->collectibles);
 	}
-	else if (game->map[y][x] == EXIT)
+	else if (game->map[y][x] == EXIT && game->collected == game->collectibles)
 	{
 		ft_printf("Congratulations! You completed the level in %d moves.\n",
 			game->moves + 1);

@@ -49,7 +49,7 @@ void	render_map(t_game *game)
 			draw_tile(game, game->empty, x, y);
 			if (game->map[y][x] == WALL)
 				draw_tile(game, game->wall, x, y);
-			else if (game->map[y][x] == PLAYER)
+			else if (game->map[y][x] == PLAYER || game->map[y][x] == '2')
 				draw_tile(game, game->player, x, y);
 			else if (game->map[y][x] == COLLECTIBLE)
 				draw_tile(game, game->collectible, x, y);
