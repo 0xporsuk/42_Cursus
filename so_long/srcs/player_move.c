@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 19:35:36 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/04/07 19:35:37 by mdonmeze         ###   ########.fr       */
+/*   Created: 2025/03/17 20:25:36 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/04/08 03:21:54 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	move_player(t_game *game, int new_x, int new_y)
+static void	move_player(t_game *game, int new_x, int new_y)
 {
 	if (game->map[new_y][new_x] == EXIT)
 		game->map[new_y][new_x] = '2';
@@ -28,7 +28,7 @@ void	move_player(t_game *game, int new_x, int new_y)
 	ft_printf("Moves: %d\n", game->moves);
 }
 
-int	is_valid_move(t_game *game, int x, int y)
+static int	is_valid_move(t_game *game, int x, int y)
 {
 	if (game->map[y][x] == WALL)
 		return (0);
@@ -40,7 +40,7 @@ int	is_valid_move(t_game *game, int x, int y)
 	return (1);
 }
 
-void	try_move(t_game *game, int x, int y)
+static void	try_move(t_game *game, int x, int y)
 {
 	if (!is_valid_move(game, x, y))
 		return ;

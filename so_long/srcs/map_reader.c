@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 19:22:32 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/04/07 19:23:35 by mdonmeze         ###   ########.fr       */
+/*   Created: 2025/03/17 19:25:32 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/04/08 03:22:13 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ int	read_map(t_game *game, char *filename)
 	line = NULL;
 	tmp = get_next_line(fd);
 	if (!tmp)
-		cleanup_and_exit(game, 1);
+	{
+		ft_printf("Error\nInvalid Map!\n");
+		free(tmp);
+		exit(1);
+	}
 	while (tmp)
 	{
 		line = ft_strjoin(line, tmp);
@@ -43,7 +47,6 @@ int	read_map(t_game *game, char *filename)
 		tmp = get_next_line(fd);
 	}
 	game->map = ft_split(line, '\n');
-	game->width = (int)ft_strlen(game->map[0]);
 	free(line);
 	return (1);
 }

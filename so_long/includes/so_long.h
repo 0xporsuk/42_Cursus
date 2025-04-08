@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 19:21:22 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/04/07 19:40:05 by mdonmeze         ###   ########.fr       */
+/*   Created: 2025/03/17 19:11:22 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/04/08 03:22:30 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,36 +62,16 @@ typedef struct s_img {
 }	t_img;
 
 void	cleanup_and_exit(t_game *game, int exit_code);
-int		handle_close(t_game *game);
-
 int		check_file_extension(char *filename);
 int		read_map(t_game *game, char *filename);
 void	free_map(t_game *game);
-
-int		is_rectangular(t_game *game);
-int		is_sur_walls(t_game *game);
-void	check_character(t_game *game, int i, int j, int *counts);
-int		is_req_elements(t_game *game);
 int		validate_map(t_game *game);
-
 int		init_mlx(t_game *game);
 void	cleanup_mlx(t_game *game);
-
-void	*load_image(t_game *game, char *path);
 int		load_images(t_game *game);
-void	draw_tile(t_game *game, void *img, int x, int y);
 void	render_map(t_game *game);
 void	cleanup_images(t_game *game);
-
-void	move_player(t_game *game, int new_x, int new_y);
-int		is_valid_move(t_game *game, int x, int y);
-void	try_move(t_game *game, int x, int y);
 int		key_hook(int keycode, t_game *game);
-
 char	*get_next_line(int fd);
-
-char	**duplicate_map(t_game *game);
-void	flood_fill(char **map, int x, int y, int *reach_counts);
 int		check_valid_path(t_game *game);
-
 #endif

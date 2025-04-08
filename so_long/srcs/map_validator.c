@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 19:39:08 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/04/07 19:39:53 by mdonmeze         ###   ########.fr       */
+/*   Created: 2025/03/18 22:30:08 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/04/08 03:20:56 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	is_rectangular(t_game *game)
+static int	is_rectangular(t_game *game)
 {
 	int	i;
 	int	len;
@@ -36,7 +36,7 @@ int	is_rectangular(t_game *game)
 	return (1);
 }
 
-int	is_sur_walls(t_game *game)
+static int	is_sur_walls(t_game *game)
 {
 	int	i;
 
@@ -63,7 +63,7 @@ int	is_sur_walls(t_game *game)
 	return (1);
 }
 
-void	check_character(t_game *game, int i, int j, int *counts)
+static void	check_character(t_game *game, int i, int j, int *counts)
 {
 	if (game->map[i][j] == EXIT)
 		counts[0]++;
@@ -82,7 +82,7 @@ void	check_character(t_game *game, int i, int j, int *counts)
 	}
 }
 
-int	is_req_elements(t_game *game)
+static int	is_req_elements(t_game *game)
 {
 	int	i;
 	int	j;

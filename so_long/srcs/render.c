@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 19:35:28 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/04/07 19:35:29 by mdonmeze         ###   ########.fr       */
+/*   Created: 2025/03/17 20:15:28 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/04/08 03:21:42 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	*load_image(t_game *game, char *path)
+static void	*load_image(t_game *game, char *path)
 {
 	void	*img;
 	int		width;
@@ -42,9 +42,9 @@ int	load_images(t_game *game)
 	return (1);
 }
 
-void	draw_tile(t_game *game, void *img, int x, int y)
+static void	draw_tile(t_game *game, void *img, int x, int y)
 {
-	mlx_put_image_to_window(game->mlx, game->win, img, x * 32, y * 32);
+	mlx_put_image_to_window(game->mlx, game->win, img, x * 64, y * 64);
 }
 
 void	render_map(t_game *game)

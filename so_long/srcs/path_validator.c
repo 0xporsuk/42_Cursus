@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 19:35:40 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/04/07 19:37:15 by mdonmeze         ###   ########.fr       */
+/*   Created: 2025/03/20 19:35:40 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/04/08 03:21:20 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	**duplicate_map(t_game *game)
+static char	**duplicate_map(t_game *game)
 {
 	char	**copy;
 	int		i;
@@ -37,7 +37,7 @@ char	**duplicate_map(t_game *game)
 	return (copy);
 }
 
-void	flood_fill(char **map, int x, int y, int *reach_counts)
+static void	flood_fill(char **map, int x, int y, int *reach_counts)
 {
 	if (map[y][x] == WALL || map[y][x] == 'V')
 		return ;

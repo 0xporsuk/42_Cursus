@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 19:29:26 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/04/07 19:29:27 by mdonmeze         ###   ########.fr       */
+/*   Created: 2025/03/19 19:29:26 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/04/08 03:21:10 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	init_mlx(t_game *game)
 		ft_printf("Error\nFailed to initialize MLX\n");
 		return (0);
 	}
-	win_width = game->width * 32;
-	win_height = game->height * 32;
+	win_width = game->width * 64;
+	win_height = game->height * 64;
 	game->win = mlx_new_window(game->mlx, win_width, win_height, "so_long");
 	if (!game->win)
 	{

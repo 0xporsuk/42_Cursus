@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 19:22:19 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/04/07 19:22:20 by mdonmeze         ###   ########.fr       */
+/*   Created: 2025/03/17 19:22:19 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/04/08 03:20:24 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	cleanup_and_exit(t_game *game, int exit_code)
 	exit(exit_code);
 }
 
-int	handle_close(t_game *game)
+static int	handle_close(t_game *game)
 {
 	ft_printf("Game closed\n");
 	cleanup_and_exit(game, 0);
@@ -38,6 +38,7 @@ int	main(int ac, char **av)
 	ft_memset(&game, 0, sizeof(t_game));
 	if (read_map(&game, av[1]) == 0)
 		cleanup_and_exit(&game, 1);
+	game.width = (int)ft_strlen(game.map[0]);
 	if (validate_map(&game) == 0)
 		cleanup_and_exit(&game, 1);
 	if (init_mlx(&game) == 0)
