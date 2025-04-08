@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:11:22 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/04/08 03:22:30 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:01:22 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 # define SO_LONG_H
 
 # include <stdlib.h>
-# include <unistd.h>
 # include <fcntl.h>
-# include <stdio.h>
 # include <ft_printf.h>
 # include <libft.h>
 # include <mlx.h>
@@ -62,7 +60,6 @@ typedef struct s_img {
 }	t_img;
 
 void	cleanup_and_exit(t_game *game, int exit_code);
-int		check_file_extension(char *filename);
 int		read_map(t_game *game, char *filename);
 void	free_map(t_game *game);
 int		validate_map(t_game *game);
@@ -74,4 +71,6 @@ void	cleanup_images(t_game *game);
 int		key_hook(int keycode, t_game *game);
 char	*get_next_line(int fd);
 int		check_valid_path(t_game *game);
+int		arg_check(int ac, char **av);
+
 #endif

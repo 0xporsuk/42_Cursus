@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:40:47 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/12/27 13:41:21 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2025/04/08 07:53:06 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,18 @@ char	*nextline(char *readone)
 	return (str);
 }
 
+static void	clean_static_buffer(char **buffer)
+{
+	if (*buffer && (*buffer)[0] == '\0')
+	{
+		free(*buffer);
+		*buffer = NULL;
+	}
+}
+
 char	*get_next_line(int fd)
 {
-	static char	*readone;
+	static char	*readone = NULL;
 	char		*arr;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -105,6 +114,13 @@ char	*get_next_line(int fd)
 	if (!readone)
 		return (NULL);
 	arr = put(readone);
+	if (!arr)
+	{
+		free(readone);
+		readone = NULL;
+		return (NULL);
+	}
 	readone = nextline(readone);
+	clean_static_buffer(&readone);
 	return (arr);
 }

@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 22:30:08 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/04/08 03:20:56 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2025/04/08 08:24:19 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static int	is_sur_walls(t_game *game)
 	int	i;
 
 	i = 0;
+	if (!game->map || !game->map[0])
+		return (0);
 	while (i < game->width)
 	{
 		if (game->map[0][i] != WALL || game->map[game->height - 1][i] != WALL)
