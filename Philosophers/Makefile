@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror -pthread
 
 NAME = philo
 
-SRCS = main.c init.c routine.c utils.c time.c
+SRCS = main.c init.c routine.c utils.c time.c monitor.c
 OBJS = $(SRCS:.c=.o)
 
 INCLUDES = -I.

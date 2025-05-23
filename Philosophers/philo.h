@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/12 16:52:10 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/05/23 16:13:03 by mdonmeze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -33,14 +45,14 @@ typedef struct s_philo {
 }
 t_philo;
 
-int ft_atoi(const char *str);
-long get_time(void);
-void my_sleep(long time_in_ms);
-void print_status(t_philo *philo, char *message);
-int init_all(t_rules *rules, t_philo **philos, int argc, char **argv);
-void *routine(void *arg);
-int clear_all(t_rules, t_philo *philos);
-
+int 	ft_atoi(const char *str);
+long 	get_time(void);
+void 	my_sleep(long time_in_ms);
+void 	print_status(t_philo *philo, char *message);
+int 	init_all(t_rules *rules, t_philo **philos, int argc, char **argv);
+void 	*routine(void *arg);
+int 	clear_all(t_rules, t_philo *philos);
+void	*monitor_routine(void *arg);
 
 
 #endif

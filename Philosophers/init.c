@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/23 16:01:52 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/05/23 18:48:43 by mdonmeze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int init_all(t_rules *rules, t_philo **philos, int ac, char **av)
@@ -7,7 +19,9 @@ int init_all(t_rules *rules, t_philo **philos, int ac, char **av)
 		printf("Error: Invalid number of arguments\n");
 		return (1);
 	}
-	int i = 0;
+	int i;
+
+	i = 0;
 	rules->number_of_philosophers = ft_atoi(av[1]);
 	rules->time_to_die = ft_atoi(av[2]);
 	rules->time_to_eat = ft_atoi(av[3]);
@@ -36,22 +50,20 @@ int init_all(t_rules *rules, t_philo **philos, int ac, char **av)
 	*philos = malloc(sizeof(t_philo) * rules->number_of_philosophers);
 	if (!*philos)
 		return (1);
+	rules->start_time = get_time();
+	rules->dead= 0;
 
 	i = 0;
 	while (i < rules->number_of_philosophers)
 	{
 		(*philos)[i].id = i + 1;
 		(*philos)[i].eat_count = 0;
-		(*philos)[i].last_meal = 0;
+		(*philos)[i].last_meal = rules->start_time;
 		(*philos)[i].rules = rules;
 		(*philos)[i].left_fork = &rules->forks[i];
 		(*philos)[i].right_fork = &rules->forks[(i + 1) % rules->number_of_philosophers];
 		i++;
 	}
-
-	rules->start_time = get_time();
-	rules->dead= 0;
-	pthread_mutex_init(&rules->print_mutex, NULL);
 
 	return (0);
 }
