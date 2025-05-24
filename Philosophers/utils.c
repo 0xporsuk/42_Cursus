@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md <md@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:55:45 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/05/23 16:03:07 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2025/05/25 00:17:40 by md               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	is_simulation_over(t_rules *rules)
+{
+	int	result;
+
+	pthread_mutex_lock(&rules->print_mutex);
+	result = rules->dead || rules->finished;
+	pthread_mutex_unlock(&rules->print_mutex);
+	return (result);
+}
 
 int	ft_isdigit(int c)
 {
