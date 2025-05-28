@@ -6,7 +6,7 @@
 /*   By: md <md@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:02:08 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/05/25 00:34:26 by md               ###   ########.fr       */
+/*   Updated: 2025/05/29 01:31:55 by md               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		usleep(100);
+		usleep(10);
 	while (!is_simulation_over(philo->rules))
 	{
 		take_forks(philo);
-		print_status(philo, "is eating");
 		pthread_mutex_lock(&philo->rules->meal_mutex);
+		print_status(philo, "is eating");
 		philo->last_meal = get_time();
 		philo->eat_count++;
 		pthread_mutex_unlock(&philo->rules->meal_mutex);

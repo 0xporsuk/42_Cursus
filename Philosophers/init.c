@@ -6,7 +6,7 @@
 /*   By: md <md@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 16:01:52 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/05/25 00:26:16 by md               ###   ########.fr       */
+/*   Updated: 2025/05/29 01:32:16 by md               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	handle_single_philo(t_rules *rules)
 {
 	rules->start_time = get_time();
 	printf("0 1 has taken a fork\n");
-	usleep(rules->time_to_die * 1000);
+	my_sleep(rules->time_to_die);
 	printf("%d 1 died\n", rules->time_to_die);
 	return (1);
 }
