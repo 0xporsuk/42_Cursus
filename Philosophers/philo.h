@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md <md@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:52:10 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/05/29 01:31:59 by md               ###   ########.fr       */
+/*   Updated: 2025/05/29 23:04:13 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ void	*routine(void *arg);
 int		clear_all(t_rules *rules, t_philo *philos);
 void	*monitor_routine(void *arg);
 int		is_simulation_over(t_rules *rules);
-int	check_philosopher_death(t_philo *philo, t_rules *rules);
+int		check_philosopher_death(t_philo *philo, t_rules *rules);
 
 #endif

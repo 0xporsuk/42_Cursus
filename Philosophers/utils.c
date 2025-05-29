@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: md <md@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:55:45 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/05/25 00:17:40 by md               ###   ########.fr       */
+/*   Updated: 2025/05/29 23:08:02 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_simulation_over(t_rules *rules)
 	int	result;
 
 	pthread_mutex_lock(&rules->print_mutex);
-	result = rules->dead || rules->finished;
+	result = (rules->dead || rules->finished);
 	pthread_mutex_unlock(&rules->print_mutex);
 	return (result);
 }
