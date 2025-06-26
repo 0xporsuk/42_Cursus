@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 19:42:51 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/06/04 05:09:43 by mdonmeze         ###   ########.fr       */
+/*   Created: 2025/06/27 01:49:19 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/06/27 02:00:18 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	*ft_memset(void *dest, int c, size_t count)
+static 	void builtin_pwd(void)
 {
-	unsigned char	*ptr;
+	char cwd[1024];
 
-	ptr = (unsigned char *)dest;
-	while (count--)
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
-		*ptr = (unsigned char) c;
-		ptr++;
+		printf("%s\n", cwd);
 	}
-	return (dest);
+	else
+		perror("minishell: pwd");
 }

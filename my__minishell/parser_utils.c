@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 19:42:51 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/06/04 05:09:43 by mdonmeze         ###   ########.fr       */
+/*   Created: 2025/06/19 13:43:57 by md                #+#    #+#             */
+/*   Updated: 2025/06/25 18:10:45 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	*ft_memset(void *dest, int c, size_t count)
+//Token listesindeki kelime sayısını bulur(pip'e kadar)
+static int	count_args(t_token *tokens)
 {
-	unsigned char	*ptr;
+	int	count;
 
-	ptr = (unsigned char *)dest;
-	while (count--)
+	count = 0;
+	while (tokens && tokens->type != TOKEN_PIPE)
 	{
-		*ptr = (unsigned char) c;
-		ptr++;
+		if (tokens->type == TOKEN_WORD)
+			count++;
+		tokens = tokens->next;
 	}
-	return (dest);
+	return (count);
 }
+
