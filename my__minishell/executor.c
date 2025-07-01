@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executer.c                                         :+:      :+:    :+:   */
+/*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: md <md@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 13:42:55 by md                #+#    #+#             */
-/*   Updated: 2025/06/27 02:02:12 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2025/06/30 02:39:58 by md               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void free_path(char **path)
 	free(path);
 }
 //path içerisinde geziyor ve konumları bölüyor.
-char	*get_command_path(char *cmd, char **envp)
+char	*get_command_path(char *cmd, char *shell)
 {
 	char	**path;
 	char	*path_part;
@@ -43,9 +43,9 @@ char	*get_command_path(char *cmd, char **envp)
 		return (NULL);
 	}
 	i = 0;
-	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)
+	while (shell[i] && ft_strncmp(shell[i], "PATH=", 5) != 0)
 		i++;
-	path = ft_split(envp[i] + 5, ':');
+	path = ft_split(shell[i] + 5, ':');
 	if (!path)
 		return (NULL);
 	i = 0;
@@ -67,14 +67,14 @@ char	*get_command_path(char *cmd, char **envp)
 }
 /*gelen argüman komut mu diye bakıyor eğer komutsa pathe bakıp çalıştırılabilir
 olup olmadığına bakıyor.*/
-static void execute_simple_command(t_command *cmd, char **envp)
+static void execute_simple_command(t_command *cmd, char *shell)
 {
 	char	*path;
 
 	if (!cmd || !cmd->args || !cmd->args[0])
 		exit(EXIT_FAILURE);
 
-	path = get_command_path(cmd->args[0], envp);
+	path = get_command_path(cmd->args[0], shell);
 	if (!path)
 	{
 		ft_putstr_fd("minishell: command not found: ", 2);
@@ -82,7 +82,7 @@ static void execute_simple_command(t_command *cmd, char **envp)
 		exit(127);
 	}
 
-	if (execve(path, cmd->args, envp) == -1)
+	if (execve(path, cmd->args, shell) == -1)
 	{
 		perror("minishell");
 		free(path);
@@ -90,36 +90,27 @@ static void execute_simple_command(t_command *cmd, char **envp)
 	}
 }
 
-void execute_pipeline(t_command *pipeline, char **envp)
+void execute_pipeline(t_command *pipeline, t_shell *shell)
 {
 	pid_t 	pid;
 	int		status;
 
-	if (!pipeline)
+	if (!pipeline || !pipeline->args || ! !pipeline->args[0])
 		return ;
-	//buraya pipeları yönetecek bir döngü eklenecek!!!!!
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("fork");
-		return ;
-
-	}
-	if (pid == 0)
-	{
-		// child süreçexecve("/bin/ls", )
-
-		execute_simple_command(pipeline, envp);
-	}
+	if (is_builtin(pipeline->args[0]))
+		shell->last_exit_code = execute_builtin(pipeline, shell);
 	else
 	{
-		//ana süreç
-		//childin bitmesini bekle
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-		g_last_exit_status = WEXITSTATUS(status);
+		pid = fork();
+		if (pid == -1)
+			perror("fork");
+		else if (pid == 0)
+			execute_simple_command(pipeline, shell);
 		else
-			g_last_exit_status = 128 + WTERMSIG(status);
+		{
+			waitpid(pid, &status, 0);
+			if (WIFEXITED(status))
+			g_last_exit_status = WEXITSTATUS(status);
+		}
 	}
-
 }
